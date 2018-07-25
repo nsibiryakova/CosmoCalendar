@@ -100,6 +100,12 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
 
     private FetchMonthsAsyncTask asyncTask;
 
+    public void setHideBottomBar(boolean hideBottomBar) {
+        this.hideBottomBar = hideBottomBar;
+    }
+
+    private boolean hideBottomBar;
+
     public CalendarView(Context context) {
         this(context,null);
     }
@@ -664,7 +670,7 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
      * Display selected days for RANGE mode in bottom bar
      */
     private void displaySelectedDaysRange() {
-        if (selectionManager instanceof RangeSelectionManager) {
+        if (selectionManager instanceof RangeSelectionManager && !hideBottomBar) {
             Pair<Day, Day> days = ((RangeSelectionManager) selectionManager).getDays();
             if (days != null) {
                 llRangeSelection.setVisibility(VISIBLE);
