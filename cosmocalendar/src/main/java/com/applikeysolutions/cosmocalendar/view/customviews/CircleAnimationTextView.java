@@ -128,7 +128,7 @@ public class CircleAnimationTextView extends AppCompatTextView {
             createCirclePaint();
         }
 
-        final int diameter = getWidth() - DEFAULT_PADDING * 2;
+        final int diameter = Math.min(getWidth(),getHeight()) - DEFAULT_PADDING * 2;
         final int diameterProgress = animationProgress * diameter / MAX_PROGRESS;
 
         setBackgroundColor(Color.TRANSPARENT);
@@ -139,8 +139,8 @@ public class CircleAnimationTextView extends AppCompatTextView {
         if (circleUnderPaint == null || stateChanged) {
             createCircleUnderPaint();
         }
-        final int diameter = getWidth() - DEFAULT_PADDING * 2;
-        canvas.drawCircle(getWidth() / 2, getWidth() / 2, diameter / 2, circleUnderPaint);
+        final int diameter = Math.min(getWidth(),getHeight()) - DEFAULT_PADDING * 2;
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, diameter / 2, circleUnderPaint);
     }
 
     private void createCirclePaint() {
@@ -223,15 +223,21 @@ public class CircleAnimationTextView extends AppCompatTextView {
     }
 
     private Rect getRectangleForState() {
+        int diameter = Math.min(getWidth(),getHeight()) - DEFAULT_PADDING * 2;
+        int halfHeight = getHeight() / 2;
+
         switch (selectionState) {
+
             case START_RANGE_DAY:
-                return new Rect(getWidth() / 2, DEFAULT_PADDING, getWidth(), getHeight() - DEFAULT_PADDING);
+
+                return new Rect(getWidth() / 2, halfHeight - diameter/2, getWidth(), halfHeight + diameter/2);
 
             case END_RANGE_DAY:
-                return new Rect(0, DEFAULT_PADDING, getWidth() / 2, getHeight() - DEFAULT_PADDING);
+
+                return new Rect(0, halfHeight - diameter/2, getWidth()/2, halfHeight + diameter/2);
 
             case RANGE_DAY:
-                return new Rect(0, DEFAULT_PADDING, getWidth(), getHeight() - DEFAULT_PADDING);
+                return new Rect(0, halfHeight - diameter/2, getWidth(), halfHeight + diameter/2);
 
             default:
                 return null;
