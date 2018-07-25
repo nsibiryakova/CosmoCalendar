@@ -47,6 +47,13 @@ public class DefaultCalendarActivity extends AppCompatActivity implements RadioG
 
         initViews();
         createCriterias();
+        Calendar min = Calendar.getInstance();
+        min.add(Calendar.MONTH,-1);
+
+        Calendar max = Calendar.getInstance();
+        max.add(Calendar.MONTH,1);
+        calendarView.setMinDate(min);
+        calendarView.setMaxDate(max);
     }
 
     private void initViews() {

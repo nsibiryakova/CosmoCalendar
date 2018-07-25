@@ -26,6 +26,7 @@ import com.applikeysolutions.cosmocalendar.settings.lists.CalendarListsInterface
 import com.applikeysolutions.cosmocalendar.settings.selection.SelectionInterface;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -392,4 +393,25 @@ public class CalendarDialog extends Dialog implements View.OnClickListener,
     public void setFirstDayOfWeek(int firstDayOfWeek) {
         calendarView.setFirstDayOfWeek(firstDayOfWeek);
     }
+
+    @Override
+    public Calendar getMinDate() {
+        return calendarView.getMinDate();
+    }
+
+    @Override
+    public Calendar getMaxDate() {
+        return calendarView.getMaxDate();
+    }
+
+    @Override
+    public void setMinDate(Calendar minDate) {
+        calendarView.setMinDate(minDate);
+    }
+
+    @Override
+    public void setMaxDate(Calendar maxDate) {
+        calendarView.setMaxDate(maxDate);
+    }
+
 }

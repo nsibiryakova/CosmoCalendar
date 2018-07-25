@@ -331,4 +331,25 @@ public class SettingsManager implements AppearanceInterface, DateInterface, Cale
     public void setFirstDayOfWeek(int firstDayOfWeek) {
         dateModel.setFirstDayOfWeek(firstDayOfWeek);
     }
+
+    @Override
+    public Calendar getMinDate() {
+        return calendarListsModel.getMinDate();
+    }
+
+    @Override
+    public Calendar getMaxDate() {
+        return calendarListsModel.getMaxDate();
+    }
+
+
+    @Override
+    public void setMinDate(Calendar minDate) {
+        calendarListsModel.setMinDate(minDate);
+    }
+
+    @Override
+    public void setMaxDate(Calendar maxDate) {
+        calendarListsModel.setMaxDate(maxDate);
+    }
 }

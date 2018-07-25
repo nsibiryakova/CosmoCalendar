@@ -10,6 +10,9 @@ import java.util.TreeSet;
 
 public class CalendarListsModel implements CalendarListsInterface {
 
+    private Calendar minDate;
+    private Calendar maxDate;
+
     //Disabled days cannot be selected
     private Set<Long> disabledDays = new TreeSet<>();
 
@@ -60,5 +63,25 @@ public class CalendarListsModel implements CalendarListsInterface {
     @Override
     public void addConnectedDays(ConnectedDays connectedDays) {
         connectedDaysManager.addConnectedDays(connectedDays);
+    }
+
+    @Override
+    public Calendar getMinDate() {
+        return minDate;
+    }
+
+    @Override
+    public void setMinDate(Calendar minDate) {
+        this.minDate = minDate;
+    }
+
+    @Override
+    public Calendar getMaxDate() {
+        return maxDate;
+    }
+
+    @Override
+    public void setMaxDate(Calendar maxDate) {
+        this.maxDate = maxDate;
     }
 }

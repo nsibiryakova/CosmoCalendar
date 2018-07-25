@@ -157,12 +157,25 @@ public final class CalendarUtils {
             day.setWeekend(settingsManager.getWeekendDays().contains(day.getCalendar().get(Calendar.DAY_OF_WEEK)));
         }
 
+        if (settingsManager.getMinDate() != null) {
+            day.setDisabled(isDayDisabledByMinDate(day, settingsManager.getMinDate()));
+        }
+
+        if (settingsManager.getMaxDate() != null) {
+            if (!day.isDisabled()) {
+                day.setDisabled(isDayDisabledByMaxDate(day, settingsManager.getMaxDate()));
+            }
+        }
+
         if (settingsManager.getDisabledDays() != null) {
             day.setDisabled(isDayInSet(day, settingsManager.getDisabledDays()));
+            if (!day.isDisabled()) {
+                day.setDisabled(isDayInSet(day, settingsManager.getDisabledDays()));
+            }
         }
 
         if (settingsManager.getDisabledDaysCriteria() != null) {
-            if(!day.isDisabled()){
+            if (!day.isDisabled()) {
                 day.setDisabled(isDayDisabledByCriteria(day, settingsManager.getDisabledDaysCriteria()));
             }
         }
@@ -185,7 +198,7 @@ public final class CalendarUtils {
 
     public static boolean isDayDisabledByCriteria(Day day, DisabledDaysCriteria criteria) {
         int field = -1;
-        switch (criteria.getCriteriaType()){
+        switch (criteria.getCriteriaType()) {
             case DAYS_OF_MONTH:
                 field = Calendar.DAY_OF_MONTH;
                 break;
@@ -195,18 +208,31 @@ public final class CalendarUtils {
                 break;
         }
 
-        for(int dayInt : criteria.getDays()){
-            if(dayInt == day.getCalendar().get(field)){
+        for (int dayInt : criteria.getDays()) {
+            if (dayInt == day.getCalendar().get(field)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static int getIconHeight(Resources resources, int iconResId){
+    public static int getIconHeight(Resources resources, int iconResId) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(resources, iconResId, options);
         return options.outHeight;
     }
+
+    public static boolean isDayDisabledByMinDate(Day day, Calendar minDate) {
+        return day.getCalendar().get(Calendar.YEAR) < minDate.get(Calendar.YEAR)
+                || day.getCalendar().get(Calendar.YEAR) == minDate.get(Calendar.YEAR)
+                && day.getCalendar().get(Calendar.DAY_OF_YEAR) < minDate.get(Calendar.DAY_OF_YEAR);
+    }
+
+    public static boolean isDayDisabledByMaxDate(Day day, Calendar maxDate) {
+        return day.getCalendar().get(Calendar.YEAR) > maxDate.get(Calendar.YEAR)
+                || day.getCalendar().get(Calendar.YEAR) == maxDate.get(Calendar.YEAR)
+                && day.getCalendar().get(Calendar.DAY_OF_YEAR) > maxDate.get(Calendar.DAY_OF_YEAR);
+    }
+
 }
