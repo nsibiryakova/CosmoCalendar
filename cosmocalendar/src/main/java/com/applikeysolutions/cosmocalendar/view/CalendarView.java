@@ -50,6 +50,7 @@ import com.applikeysolutions.cosmocalendar.settings.lists.connected_days.Connect
 import com.applikeysolutions.cosmocalendar.settings.selection.SelectionInterface;
 import com.applikeysolutions.cosmocalendar.utils.CalendarUtils;
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
+import com.applikeysolutions.cosmocalendar.utils.ViewIdGenerate;
 import com.applikeysolutions.cosmocalendar.utils.WeekDay;
 import com.applikeysolutions.cosmocalendar.utils.snap.GravitySnapHelper;
 import com.applikeysolutions.cosmocalendar.view.customviews.CircleAnimationTextView;
@@ -273,7 +274,7 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
         boolean isTitleAlreadyAdded = llDaysOfWeekTitles != null;
         if (!isTitleAlreadyAdded) {
             llDaysOfWeekTitles = new LinearLayout(getContext());
-            llDaysOfWeekTitles.setId(View.generateViewId());
+            llDaysOfWeekTitles.setId(ViewIdGenerate.generateViewId());
             llDaysOfWeekTitles.setOrientation(LinearLayout.HORIZONTAL);
             llDaysOfWeekTitles.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         } else {
@@ -305,7 +306,7 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
     private void createBottomSelectionBar() {
         flBottomSelectionBar = new FrameLayout(getContext());
 //        flBottomSelectionBar.setLayoutTransition(new LayoutTransition());
-        flBottomSelectionBar.setId(View.generateViewId());
+        flBottomSelectionBar.setId(ViewIdGenerate.generateViewId());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.BELOW, rvMonths.getId());
         flBottomSelectionBar.setLayoutParams(params);
@@ -323,7 +324,7 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
      */
     private void createMultipleSelectionBarRecycler() {
         rvMultipleSelectedList = new RecyclerView(getContext());
-        rvMultipleSelectedList.setId(View.generateViewId());
+        rvMultipleSelectedList.setId(ViewIdGenerate.generateViewId());
         rvMultipleSelectedList.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         rvMultipleSelectedList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         multipleSelectionBarAdapter = new MultipleSelectionBarAdapter(this, this);
@@ -386,7 +387,7 @@ public class CalendarView extends RelativeLayout implements OnDaySelectedListene
 
     private void createRecyclerView() {
         rvMonths = new SlowdownRecyclerView(getContext());
-        rvMonths.setId(View.generateViewId());
+        rvMonths.setId(ViewIdGenerate.generateViewId());
         rvMonths.setHasFixedSize(true);
         rvMonths.setNestedScrollingEnabled(false);
         ((SimpleItemAnimator) rvMonths.getItemAnimator()).setSupportsChangeAnimations(false);
