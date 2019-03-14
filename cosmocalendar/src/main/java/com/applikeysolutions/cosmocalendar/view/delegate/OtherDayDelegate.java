@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.applikeysolutions.cosmocalendar.adapter.DaysAdapter;
 import com.applikeysolutions.cosmocalendar.adapter.MonthAdapter;
 import com.applikeysolutions.cosmocalendar.selection.BaseSelectionManager;
+import com.applikeysolutions.cosmocalendar.selection.MultipleSelectionManager;
 import com.applikeysolutions.customizablecalendar.R;
 import com.applikeysolutions.cosmocalendar.adapter.viewholder.OtherDayHolder;
 import com.applikeysolutions.cosmocalendar.model.Day;
@@ -27,9 +28,22 @@ public class OtherDayDelegate {
         return new OtherDayHolder(view, calendarView);
     }
 
-    public void onBindDayHolder(DaysAdapter daysAdapter, Day day, OtherDayHolder holder, int position) {
+    public void onBindDayHolder(final DaysAdapter daysAdapter,final Day day, OtherDayHolder holder,final int position) {
         final BaseSelectionManager selectionManager = monthAdapter.getSelectionManager();
         holder.bind(day, selectionManager);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!day.isDisabled()) {
+                    selectionManager.toggleDay(day);
+                    if (selectionManager instanceof MultipleSelectionManager) {
+                        daysAdapter.notifyItemChanged(position);
+                    } else {
+                        monthAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
 //        holder.bind(day);
     }
 }

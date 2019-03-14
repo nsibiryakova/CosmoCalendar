@@ -33,6 +33,8 @@ public class OtherDayHolder extends BaseDayHolder {
         } else {
             unselect(day);
         }
+
+
     }
 
     private void select(Day day) {
