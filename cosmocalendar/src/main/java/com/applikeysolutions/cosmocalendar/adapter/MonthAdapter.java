@@ -54,7 +54,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthHolder> {
     public MonthHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         daysAdapter = new DaysAdapter.DaysAdapterBuilder()
                 .setDayOfWeekDelegate(new DayOfWeekDelegate(calendarView))
-                .setOtherDayDelegate(new OtherDayDelegate(calendarView))
+                .setOtherDayDelegate(new OtherDayDelegate(calendarView,this))
                 .setDayDelegate(new DayDelegate(calendarView, this))
                 .setCalendarView(calendarView)
                 .createDaysAdapter();
