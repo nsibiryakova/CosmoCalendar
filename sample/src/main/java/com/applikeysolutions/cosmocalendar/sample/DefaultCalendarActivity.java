@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.applikeysolutions.cosmocalendar.model.Day;
 import com.applikeysolutions.cosmocalendar.selection.MultipleSelectionManager;
 import com.applikeysolutions.cosmocalendar.selection.criteria.BaseCriteria;
 import com.applikeysolutions.cosmocalendar.selection.criteria.WeekDayCriteria;
@@ -48,12 +49,18 @@ public class DefaultCalendarActivity extends AppCompatActivity implements RadioG
         initViews();
         createCriterias();
         Calendar min = Calendar.getInstance();
-        min.add(Calendar.MONTH,-1);
+        min.add(Calendar.MONTH,2);
 
-        Calendar max = Calendar.getInstance();
-        max.add(Calendar.MONTH,1);
+//        Calendar max = Calendar.getInstance();
+//        max.add(Calendar.MONTH,1);
         calendarView.setMinDate(min);
-        calendarView.setMaxDate(max);
+//        calendarView.setMaxDate(max);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, 1);
+
+//        calendarView.getSelectionManager().toggleDay(new Day(calendar));
+//        calendarView.scrollToSelectedDate(calendar);
     }
 
     private void initViews() {

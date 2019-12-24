@@ -54,7 +54,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthHolder> {
     public MonthHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         daysAdapter = new DaysAdapter.DaysAdapterBuilder()
                 .setDayOfWeekDelegate(new DayOfWeekDelegate(calendarView))
-                .setOtherDayDelegate(new OtherDayDelegate(calendarView,this))
+                .setOtherDayDelegate(new OtherDayDelegate(calendarView))
                 .setDayDelegate(new DayDelegate(calendarView, this))
                 .setCalendarView(calendarView)
                 .createDaysAdapter();
@@ -170,9 +170,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthHolder> {
     public void setMinDate(Calendar minDate) {
         for (Month month : months) {
             for (Day day : month.getDays()) {
-                if (!day.isDisabled()) {
-                    day.setDisabled(CalendarUtils.isDayDisabledByMinDate(day, minDate));
-                }
+                day.setDisabled(CalendarUtils.isDayDisabledByMinDate(day, minDate));
             }
         }
         notifyDataSetChanged();
@@ -181,9 +179,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthHolder> {
     public void setMaxDate(Calendar maxDate) {
         for (Month month : months) {
             for (Day day : month.getDays()) {
-                if (!day.isDisabled()) {
-                    day.setDisabled(CalendarUtils.isDayDisabledByMaxDate(day, maxDate));
-                }
+                day.setDisabled(CalendarUtils.isDayDisabledByMaxDate(day, maxDate));
             }
         }
         notifyDataSetChanged();

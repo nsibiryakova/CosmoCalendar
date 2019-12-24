@@ -70,7 +70,7 @@ public class DaysAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 dayOfWeekDelegate.onBindDayHolder(day, (DayOfWeekHolder) holder, position);
                 break;
             case ItemViewType.OTHER_MONTH_DAY:
-                otherDayDelegate.onBindDayHolder(this,day, (OtherDayHolder) holder, position);
+                otherDayDelegate.onBindDayHolder(day, (OtherDayHolder) holder, position);
                 break;
             case ItemViewType.MONTH_DAY:
                 dayDelegate.onBindDayHolder(this, day, (DayHolder) holder, position);
